@@ -58,7 +58,7 @@
   command: yum -q makecache -y --disablerepo=* --enablerepo=kubernetes
 
 - name: install all kubernetes packages
-  package: 
+  package:
     name: "{{ item }}"
     state: present
   with_items:
@@ -67,7 +67,7 @@
 - name: use systemd as cgroup driver
   copy:
     src: 09-kubeadm.conf
-    dest: /etc/systemd/system/kubelet.service.d/09-kubeadm.conf
+    dest: /usr/lib/systemd/system/kubelet.service.d/09-kubeadm.conf
 
 - name: reload systemd
   systemd:
@@ -94,4 +94,3 @@
     - net.bridge.bridge-nf-call-iptables
     - net.bridge.bridge-nf-call-ip6tables
     - net.ipv4.ip_forward
-
